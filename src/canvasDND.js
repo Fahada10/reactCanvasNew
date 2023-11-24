@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import sampleImage from "./reactImage.png"
 
 function CanvasDrag() {
+  
   const canvas = useRef();
   let getCtx = null;
   const [canBoxes, setCanBoxes] = React.useState({ x: 0, y: 0, w: 120, h: 70 });
@@ -16,12 +17,15 @@ function CanvasDrag() {
     canvasDimensions.height = canvasDimensions.clientHeight;
     getCtx = canvasDimensions.getContext("2d");
   }, [canBoxes]);
+
   useEffect(() => {
     canvasDraw();
   }, [canBoxes]);
+
   const canvasDraw = () => {
     fillCanvas(canBoxes);
   };
+
   const fillCanvas = (info) => {
     console.log(info)
     const { x, y, w, h } = info;
@@ -37,6 +41,7 @@ function CanvasDrag() {
       getCtx?.drawImage(image, x, y, w, h);
     };
   };
+
   const moveableItem = (x, y) => {
     let isCanvasTarget = null;
     const block = canBoxes;
@@ -52,11 +57,13 @@ function CanvasDrag() {
 
     return isCanvasTarget;
   };
+
   const onMouseDown = (e) => {
     startX = parseInt(e.nativeEvent.offsetX - canvas.current.clientLeft);
     startY = parseInt(e.nativeEvent.offsetY - canvas.current.clientTop);
     isMoveDown = moveableItem(startX, startY);
   };
+
   const onMouseMove = (e) => {
     if (!isMoveDown) return;
     const mouseX = parseInt(e.nativeEvent.offsetX - canvas.current.clientLeft);
@@ -73,9 +80,11 @@ function CanvasDrag() {
     targetCanvas = null;
     isMoveDown = false;
   };
+
   const onMouseOut = (e) => {
     onMouseUp(e);
   };
+
   const deleImage = () => {
     getCtx?.clearRect(
       0,
@@ -124,14 +133,14 @@ function CanvasDrag() {
         <button
           onClick={resetCanvas}
           style={{
-            backgroundColor: "#4CAF50", // Green background
+            backgroundColor: "#4CAF50",
             marginLeft: "5px",
-            color: "white", // White text
-            padding: "10px 20px", // Padding
-            border: "none", // No border
-            borderRadius: "5px", // Rounded corners
-            cursor: "pointer", // Pointer cursor on hover
-            fontSize: "16px", // Font size
+            color: "white",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontSize: "16px",
           }}
         >
           Reset
