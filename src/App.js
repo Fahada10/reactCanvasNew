@@ -1,6 +1,8 @@
-import sample from "./reactImage.png"
 import React, { useRef, useEffect, useState } from "react";
+
 import CanvasDrag from "./canvasDND";
+
+import sample from "./reactImage.png"
 
 function App() {
   return (
